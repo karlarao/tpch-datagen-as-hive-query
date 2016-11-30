@@ -13,7 +13,7 @@ This are set of UDFs and queries that you can use with Hive to use TPCH datagen 
     ```
 2. Run TPCHDataGen.hql with settings.hql file and set the required config variables.
     ```shell
-    hive -i settings.hql -f TPCHDataGen.hql -hiveconf SCALE=10 -hiveconf PARTS=10 -hiveconf LOCATION=/HiveTPCH/ -hiveconf TPCHBIN=resources 
+    hive -i settings.hql -f TPCHDataGen.hql -hiveconf SCALE=10 -hiveconf PARTS=10 -hiveconf LOCATION=wasb://tpchds@kkhdistore.blob.core.windows.net/HiveTPCH/ -hiveconf TPCHBIN=resources 
     ```
     Here, `SCALE` is a scale factor for TPCH, 
     `PARTS` is a number of task to use for datagen (parrellelization), 
@@ -22,11 +22,11 @@ This are set of UDFs and queries that you can use with Hive to use TPCH datagen 
 
 3. Now you can create tables on the generated data.
     ```shell
-    hive -i settings.hql -f ddl/createAllExternalTables.hql -hiveconf LOCATION=/HiveTPCH/ -hiveconf DBNAME=tpch
+    hive -i settings.hql -f ddl/createAllExternalTables.hql -hiveconf LOCATION=wasb://tpchds@kkhdistore.blob.core.windows.net/HiveTPCH/ -hiveconf DBNAME=tpch
     ```
     Generate ORC tables and analyze
     ```shell
-    hive -i settings.hql -f ddl/createAllORCTables.hql -hiveconf ORCDBNAME=tpch_orc -hiveconf SOURCE=tpch -hiveconf LOCATION=/HiveTPCHOrc/ 
+    hive -i settings.hql -f ddl/createAllORCTables.hql -hiveconf ORCDBNAME=tpch_orc -hiveconf SOURCE=tpch -hiveconf LOCATION=wasb://tpchds@kkhdistore.blob.core.windows.net/HiveTPCHOrc/ 
     hive -i settings.hql -f ddl/analyze.hql -hiveconf ORCDBNAME=tpch_orc 
     ```
 
