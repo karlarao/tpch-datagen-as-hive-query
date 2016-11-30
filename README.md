@@ -26,7 +26,7 @@ This are set of UDFs and queries that you can use with Hive to use TPCH datagen 
     ```
     Generate ORC tables and analyze
     ```shell
-    hive -i settings.hql -f ddl/createAllORCTables.hql -hiveconf ORCDBNAME=tpch_orc -hiveconf SOURCE=tpch 
+    hive -i settings.hql -f ddl/createAllORCTables.hql -hiveconf ORCDBNAME=tpch_orc -hiveconf SOURCE=tpch -hiveconf LOCATION=/HiveTPCHOrc/ 
     hive -i settings.hql -f ddl/analyze.hql -hiveconf ORCDBNAME=tpch_orc 
     ```
 
